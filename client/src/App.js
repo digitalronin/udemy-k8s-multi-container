@@ -9,10 +9,8 @@ class App extends Component {
     return (
       <Router>
         <div className="App">
-          <header className="App-header">
-            <Link to="/">Home</Link>
-            <Link to="/otherpage">Other Page</Link>
-          </header>
+          <Link to="/">Home</Link>
+          <Link to="/otherpage">Other Page</Link>
           <div>
             <Route exact path="/" component={Fib} />
             <Route path="/otherpage" component={OtherPage} />
