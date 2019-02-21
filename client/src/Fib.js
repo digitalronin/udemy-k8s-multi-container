@@ -37,6 +37,7 @@ class Fib extends Component {
         <div key={key}>
           For index {key} I calculated {this.state.values[key]}
         </div>
+      );
     }
 
     return entries;
