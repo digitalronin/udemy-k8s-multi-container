@@ -1,0 +1,21 @@
+sudo: required
+
+services:
+  - docker
+
+before_install:
+  - docker build -t digitalronin/client-test -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run digitalronin/client-test npm run test -- --coverage
+
+after_success:
+  - docker build -t digitalronin/multi-client ./client
+  - docker build -t digitalronin/multi-nginx ./nginx
+  - docker build -t digitalronin/multi-server ./server
+  - docker build -t digitalronin/multi-worker ./worker
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  - docker push digitalronin/multi-client
+  - docker push digitalronin/multi-nginx
+  - docker push digitalronin/multi-server
+  - docker push digitalronin/multi-worker
