@@ -19,3 +19,16 @@ after_success:
   - docker push digitalronin/multi-nginx
   - docker push digitalronin/multi-server
   - docker push digitalronin/multi-worker
+
+deploy:
+  on:
+    branch: master
+  provider: elasticbeanstalk
+  region: "us-west-2"
+  app: "udemy-multi"
+  env: "UdemyMulti-env"
+  bucket_name: "elasticbeanstalk-us-west-2-351222107032"
+  bucket_path: "udemy-multi"
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key:
+    secure: "$AWS_SECRET_KEY"
